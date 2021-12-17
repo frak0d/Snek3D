@@ -6,14 +6,13 @@ bdir:
 
 clean:
 	rm -rf build/
+backend: bdir
+	$(CXX) --std=c++20 main.cpp -o build/Snek3D -static -flto -Wno-narrowing -lstdc++
 
 fdeps: bdir
 	cp frontend/vertex.vert build/
 	cp frontend/frag.frag   build/
 	cp frontend/ico.png     build/
-
-backend: bdir
-	$(CXX) --std=c++20 -s -O2 main.cpp -o build/Snek3D -Wno-narrowing -static -flto
 
 backend-dbg: bdir
 	$(CXX) --std=c++20 -g -Og main.cpp -o build/Snek3D -Wno-narrowing

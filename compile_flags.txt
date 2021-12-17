@@ -1,0 +1,2 @@
+--std=c++20 -o build/Snek3D -static -flto -Wno-narrowing
+
