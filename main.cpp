@@ -57,28 +57,23 @@ int main()
 	std::signal(SIGINT, interrupt_handler);
 	std::signal(SIGSEGV, segfault_handler);
 
-	char key;
-	int err_cnt=0;
-	uint32_t num_pnts;
+	char key = 'F';
+	int err_cnt = 0;
+	uint32_t num_pnts = 1;
+	
 	using mint = uint8_t;
-
 	SnekGame3D<mint> game(16,16,16);
 
-	pipette::pipe pfront; // more contol over child process
-	if (!pfront.open("./Snek3D-Frontend ~/tmp_outb ~/tmp_inb"))
-	{
-		std::puts("\n\e[31;1m => Failed to Initiate Frontend, Exiting...\e[0m\n");
-		return -2;
-	}
+	std::system("./Snek3D-Frontend &");
 	
-	pipette::fifo fin("~/tmp_inb", 'r'); // recieve from frontend
-	pipette::fifo fout("~/tmp_outb", 'w'); // send to frontend
+	pipette::fifo fin("/home/tmp_inb", 'r'); // recieve from frontend
+	pipette::fifo fout("/home/tmp_outb", 'w'); // send to frontend
 	
 	auto cleaner = [&]()
 	{
 		std::puts("\n\e[33m => Cleaning Up Temporary FIFOs...\e[0m\n");
-		remove("~/tmp_inb");
-		remove("~/tmp_outb");
+		remove("/home/tmp_inb");
+		remove("/home/tmp_outb");
 	};
 	
 	uint8_t gg = sizeof(mint) * 8u; // max bits per coord;
@@ -100,7 +95,7 @@ int main()
 			else continue;
 		}
 
-		// for debuggng
+		usleep(1000*500);
 		std::printf("key : %c\n", key);
 		
 		if (key == 'E')	// exit signal from GUI

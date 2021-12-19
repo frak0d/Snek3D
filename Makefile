@@ -18,10 +18,10 @@ backend: bdir
 backend-dbg: bdir
 	$(CXX) --std=c++20 -g -Og main.cpp -o build/Snek3D -Wno-narrowing
 
-frontend: bdir fdeps
-	cd frontend && make
+frontend: bdir
+	cd frontend && $(MAKE)
 	mv frontend/Snek3D-Frontend build/
 
-frontend-dbg: bdir fdeps
+frontend-dbg: bdir
 	cd frontend && make debug
 	mv frontend/Snek3D-Frontend build/
