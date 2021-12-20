@@ -7,11 +7,6 @@ bdir:
 clean:
 	rm -rf build/
 
-fdeps: bdir
-	cp frontend/vertex.vert build/
-	cp frontend/frag.frag   build/
-	cp frontend/ico.png     build/
-
 backend: bdir
 	$(CXX) --std=c++20 -s -O2 main.cpp -o build/Snek3D -Wno-narrowing -static -flto
 
@@ -23,5 +18,5 @@ frontend: bdir
 	mv frontend/Snek3D-Frontend build/
 
 frontend-dbg: bdir
-	cd frontend && make debug
+	cd frontend && $(MAKE) debug
 	mv frontend/Snek3D-Frontend build/
