@@ -1,0 +1,6 @@
+[submodule "Snek3D-Server"]
+	path = server
+	url = https://github.com/Tanishq-Banyal/Snek3D-Server
+[submodule "Snek3D-Client"]
+	path = client
+	url = https://github.com/eternalfrustation/Snek3D-Client
