@@ -3,6 +3,8 @@ debug: server-dbg client-dbg
 
 bdir:
 	mkdir -p build/
+	mkdir -p build/server/
+	mkdir -p build/client/
 
 clean:
 	rm -rf build/
